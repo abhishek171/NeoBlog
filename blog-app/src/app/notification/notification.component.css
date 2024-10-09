@@ -1,0 +1,27 @@
+@keyframes slideIn{
+    0%{
+        transform: translateY(-100%);
+        transform-origin: top;
+        opacity: 0;
+    }
+    100%{
+        transform: translateY(0%);
+        transform-origin: top;
+        opacity: 1;
+    }
+  }
+.slide-content {
+    animation-name: slideIn;
+    animation-duration:0.3s;
+    animation-timing-function: ease;
+  }
+  .success{
+    background-color: rgba(20, 189, 20, 0.753);
+    border: 2px solid rgb(20, 189, 20);
+    border-radius: 10px;
+  }
+  .error{
+    background-color: rgba(250, 1, 1, 0.767);
+    border: 2px solid red;
+    border-radius: 10px;
+  }

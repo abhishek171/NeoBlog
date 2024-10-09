@@ -1,0 +1,25 @@
+.active-link{
+    color: white;
+    background-color: black;
+}
+
+@keyframes slideIn{
+    0%{
+        transform: translateY(-100%);
+        transform-origin: top;
+    }
+    100%{
+        transform: translateY(0%);
+        transform-origin: top;
+    }
+  }
+.slide-content {
+    animation-name: slideIn;
+    animation-duration:0.4s;
+    animation-timing-function: ease-in;
+  }
+
+  .buttoncss {
+    top:6%!important;
+    right:27%!important;
+}

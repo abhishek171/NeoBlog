@@ -1,0 +1,79 @@
+<div class="flex justify-center items-center m-10 min-h-screen">
+    <div class="bshadow form-border bg-white p-8 border border-red-600 rounded-lg shadow-lg w-[600px]">
+      <h2 class="flex justify-center items-center text-2xl font-bold mb-6 text-gray-800">
+        <p *ngIf="!user" class="flex items-center"><img src="/images/signup.jpg" alt="signup" class="h-[40px] me-3"> Signup</p>
+        <p *ngIf="user" class="flex items-center"><img src="/images/signup.jpg" alt="update" class="h-[40px] me-3"> Update Profile</p>
+      </h2>
+  
+      <form [formGroup]="userdata" (ngSubmit)="onSubmit()">
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+          <input type="text" id="username" formControlName="Username" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" aria-required="true">
+          <div *ngIf="userdata.get('Username')?.touched && userdata.get('Username')?.invalid && !user">
+            <span *ngIf="userdata.get('Username')?.hasError('required')" class="text-red-600">Username is required</span>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="email_id" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+          <input type="email" id="email_id" formControlName="Email" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" [readonly]="user">
+          <div *ngIf="userdata.get('Email')?.touched && userdata.get('Email')?.invalid && !user">
+            <span *ngIf="userdata.get('Email')?.hasError('required')" class="text-red-600">Email is required</span>
+            <span *ngIf="userdata.get('Email')?.hasError('email')" class="text-red-600">Invalid email address</span>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="contact" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+          <input type="tel" id="contact" formControlName="Contact" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" aria-required="true">
+          <div *ngIf="userdata.get('Contact')?.touched && userdata.get('Contact')?.invalid && !user">
+            <span *ngIf="userdata.get('Contact')?.hasError('required')" class="text-red-600">Phone number is required</span>
+            <span *ngIf="userdata.get('Contact')?.hasError('pattern')" class="text-red-600">Phone number must be exactly 10 digits</span>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+          <input id="password" formControlName="Password" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" aria-required="true">
+          <div *ngIf="userdata.get('Password')?.touched && userdata.get('Password')?.invalid && !user">
+            <span *ngIf="userdata.get('Password')?.hasError('required')" class="text-red-600">Password is required</span>
+            <span *ngIf="userdata.get('Password')?.hasError('minlength')" class="text-red-600">Password must be at least 8 characters long</span>
+            <span *ngIf="userdata.get('Password')?.hasError('maxlength')" class="text-red-600">Password cannot exceed 15 characters</span>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="confpassword" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+          <input id="confpassword" formControlName="confPassword" type="password" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm" aria-required="true">
+          <div *ngIf="getInputValue('confPassword')?.touched && !user">
+            <small *ngIf="getInputValue('confPassword')?.hasError('required')" class="text-red-600">Confirm Password is required.</small>
+            <small *ngIf="getInputValue('confPassword')?.hasError('mismatch')" class="text-red-600">Passwords do not match.</small>
+          </div>
+        </div>
+  
+        <div class="mb-4">
+          <label for="profile_pic" class="block text-sm font-medium text-gray-700 mb-2">Select Profile Picture</label>
+          <input type="file" id="profile_pic" accept="image/*" (change)="funct($event)" class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm">
+          <div *ngIf="userdata.get('ProfileImage')?.touched && userdata.get('ProfileImage')?.invalid && !user">
+            <span *ngIf="userdata.get('ProfileImage')?.hasError('required')" class="text-red-600">Profile Picture is required</span>
+          </div>
+        </div>
+  
+        <div class="font-bold text-[16px] text-center mb-4" *ngIf="!user">
+          Already a user? <a [routerLink]="['/signin']" class="cursor-pointer hover:text-red-600">Login</a>
+        </div>
+  
+        <div class="text-center">
+          <button type="submit" *ngIf="user"
+            class="w-full px-3 py-2 text-2xl font-bold border bg-black text-white border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm">
+            Update
+          </button>
+          <button type="submit" *ngIf="!user" [disabled]="userdata.invalid"
+            class="w-full px-3 py-2 border text-2xl font-bold bg-black text-white border-gray-300 rounded-md shadow-sm focus:outline-none sm:text-sm">
+            SIGNUP
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

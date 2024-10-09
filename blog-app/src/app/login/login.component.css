@@ -1,0 +1,22 @@
+.login{
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.377);
+    border: 1px solid  #d12417;
+    border-radius: 10px;
+}
+
+input:focus{
+    outline: none;
+    border: 1px solid #d12417;
+}
+
+button{
+    padding: 8px;
+    border-radius: 5px;
+    margin-left: 0%;
+    margin-top: 1%;
+    width: 100%;
+    background-color:  black;
+    color: white;
+    font-size: 20px;
+    
+}
