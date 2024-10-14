@@ -60,6 +60,7 @@ export const deleteUserBlog = async(request:Request,response:Response):Promise<v
     try{
         const { id } = request.params;
         const blogPost = await deleteBlog(id);
+        console.log(blogPost)
         response.status(200).json({success:true,message:blogPost});
     }catch(error){
         response.status(400).json({success:false,error:error.message});

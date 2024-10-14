@@ -22,7 +22,7 @@ export class UserService {
         this.router.navigate(['signin']);
       },
       error: (ERR) => {
-        this.notifyService.showError("Error Inserting Data: " + ERR.message);
+        this.notifyService.showError("User Already Exist! Login");
       }
     });
   }
@@ -32,7 +32,7 @@ export class UserService {
       .post<{ success: boolean; data: User }>(`${this.mongoParentRoute}/login`,userData, { withCredentials: true });
   }
 
-  update(userData: FormData, _id: string | undefined) {
+  update(userData: FormData, _id: string | undefined):Observable<{success: boolean; data: User}>{
     return this.http
       .put<{ success: boolean; data: User }>(`${this.mongoParentRoute}/updateUserDetail/${_id}`,userData, { withCredentials: true });
   }

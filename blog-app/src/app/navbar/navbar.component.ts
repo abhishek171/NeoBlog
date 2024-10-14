@@ -16,7 +16,7 @@ export class NavbarComponent {
   user:User|undefined;
   modal:boolean = false;
   profileAction:string | undefined;
-  searchTerm: string = '';
+  searchTerm: string = "cancel";
   
   constructor(public router:Router,private userService:UserService,private notifyService : NotificationService,private blogService:BlogpostService){
     this.userService.user$.subscribe(()=> {
@@ -67,16 +67,19 @@ export class NavbarComponent {
     if (searchForm.valid) {
      this.searchTerm = searchForm.value.searchBlog;
      this.blogService.searchTerm.next(this.searchTerm);
+     this.blogService.searchBarEmpty = true;
     }
   }
 
   get isSearchTermValid() {
-    return this.searchTerm.trim() !== '';
+    return this.searchTerm.trim() !== "cancel";
   }
 
   cancelSearch(searchForm: NgForm){
     searchForm.reset();
     this.searchTerm = "cancel";
+    this.blogService.searchEmpty = this.router.url;
+    this.blogService.searchBarEmpty=false;
     this.blogService.searchTerm.next(this.searchTerm);
   }
 

@@ -24,7 +24,7 @@ export class BlogPostComponent implements OnInit {
     this.blogPostService.search$.subscribe((searchVal) => {
       if (searchVal!== undefined && searchVal !== 'cancel') {
         this.filterPosts(searchVal);
-      } else if(searchVal === "cancel") {
+      } else if(searchVal === "cancel" && this.blogPostService.searchEmpty === '/blogpost') {
         this.isLoading = true;
         setTimeout(() => {
           this.blogPosts = [];
@@ -42,7 +42,7 @@ export class BlogPostComponent implements OnInit {
       this.blogPosts = this.blogPostService.filteredData.filter(
         (item) =>
           item.title.includes(searchVal) ||
-          item.user.Username.includes(searchVal)
+          item.user.Username.trim().includes(searchVal.trim())
       );
       this.isLoading = false;
     }, 3000);
@@ -52,7 +52,6 @@ export class BlogPostComponent implements OnInit {
     this.isLoading = true;
     this.blogPostService.listUserBlogs(this.initialLength).subscribe({
       next: (response: { success: boolean; data: Blog[] }) => {
-        this.blogPostService.filteredData = response.data;
         setTimeout(() => {
           this.isLoading = false;
           if (response.success) {
@@ -62,6 +61,7 @@ export class BlogPostComponent implements OnInit {
             else{
               const blogData = response.data as Blog[];
               this.blogPosts = [...this.blogPosts, ...blogData];
+              this.blogPostService.filteredData = this.blogPosts;
             }
           } else {
             this.notifyService.showError('No Data Found');

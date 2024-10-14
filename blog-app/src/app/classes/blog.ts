@@ -8,8 +8,8 @@ export class Blog {
     public body: string='',
     public tags: string[] = [],
     public user:User,
-    public createdAt?: Date ,
-    public updatedAt?: Date,
+    public createdAt: Date|string = '',
+    public updatedAt: Date|string = '',
     ){
         
     }

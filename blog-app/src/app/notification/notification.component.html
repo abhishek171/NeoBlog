@@ -1,6 +1,6 @@
 <div *ngIf="isVisible" 
      [ngClass]="{'success': type === 'success', 'error': type === 'error'}" 
-     class="flex items-center absolute top-[9%] left-[40%] slide-content px-10 pt-6 py-2">
+     class="flex items-center absolute top-[9%] left-[40%] z-50 slide-content px-10 pt-6 py-2">
     <p class="flex justify-center items-center gap-x-3 text-white text-xl text-center font-bold">
         <i *ngIf="type === 'success'" class="fa fa-check"></i>
         <i *ngIf="type === 'error'" class="fa fa-close"></i>

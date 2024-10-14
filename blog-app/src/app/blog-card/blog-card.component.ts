@@ -42,7 +42,7 @@ export class BlogCardComponent implements OnInit{
     this.blogPostService.deleteBlog(id).subscribe({
       next: (response) => {
         this.notifyService.showSuccess('Blog deleted Successfully!');
-        this.blogPostService.blogPosts.next(response.data);
+        this.blogPostService.blogPosts.next(response.message);
       },
       error: (error) => {
         this.notifyService.showError(error);

@@ -53,7 +53,7 @@ export const blogPostUpdation = async(id: string, blogDataToBeUpdated: BlogPost)
 
 export const findBlogsByUserId = async (id: string, skip:number): Promise<BlogPost[] | Error> => {
      try {
-        const blogPosts:BlogPost[] = await Blog.find({user:id}).skip(skip).limit(5).populate('user').sort({ createdAt: -1 }).exec();
+        const blogPosts:BlogPost[] = await Blog.find({user:id}).skip(skip).limit(6).populate('user').sort({ createdAt: -1 }).exec();
 
         const blogPostsWithUserInfo:BlogPost[] = Tobase64(blogPosts);
         return blogPostsWithUserInfo;

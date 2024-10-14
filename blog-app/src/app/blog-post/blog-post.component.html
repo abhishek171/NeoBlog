@@ -1,9 +1,9 @@
 <div [ngClass]="{'min-h-screen overflow-hidden':true,'img':blogPosts.length === 0  && !isLoading}">
-    <div class="grid grid-cols-1 lg:grid-cols-3 mt-[20%] lg:mt-[5%] gap-7 mx-8 mb-[4%]">
-        <select name="date" id="date" class="absolute top-[10%] lg:top-[12%] left-10 px-2 py-2 rounded bg-red-500 text-white font-bold" [(ngModel)]="selectorder">
-            <option value="asc" class="font-semibold">Sort Blogs By Date Ascending</option>
-            <option value="desc" class="font-semibold">Sort By Date Descending</option>
-        </select>
+    <select name="date" id="date" class="mt-5 mx-8 px-2 py-2 rounded bg-red-500 text-white font-bold" [(ngModel)]="selectorder" *ngIf="blogPosts.length!==0">
+        <option value="asc" class="font-semibold">Sort Blogs By Date Ascending</option>
+        <option value="desc" class="font-semibold">Sort By Date Descending</option>
+    </select>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-[20%] lg:mt-[3%] gap-7 mx-8 mb-[4%]">
         <div *ngFor="let blogPost of blogPosts | sortpipe: selectorder">
             <app-blog-card  [blogPost]="blogPost" ></app-blog-card>
         </div>
@@ -123,7 +123,7 @@
         </div>
       </div>
     </div>
-    <button class="rounded bg-black text-white p-2 px-3 text-xl font-semibold mx-[45%] mb-5" *ngIf="this.dataArrayNotEmpty && blogPosts.length > 6" (click)="loadMore()">Load More</button>
+    <button class="rounded bg-black text-white p-2 px-3 text-xl font-semibold mx-[45%] mb-5" *ngIf="this.dataArrayNotEmpty && blogPosts.length!== 0 && !blogPostService.searchBarEmpty" (click)="loadMore()">Load More</button>
  
   </div>
   

@@ -26,23 +26,23 @@
               </div>
           </div>
           <div class="absolute inset-y-0 right-0 flex items-center gap-x-3 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <form class="max-w-md w-80" #searchTerm="ngForm" (ngSubmit)="searchData(searchTerm)">
+            <form class="max-w-md w-80" #searchTerm="ngForm" (ngSubmit)="searchData(searchTerm)" *ngIf="router.url!=='/signin' && router.url!=='/signup'">
               <label for="searchBlog" class="sr-only">Search Blogs</label>
               <div class="relative">
-                <input type="search" id="searchBlog" name="searchBlog" class="block w-full p-3 ps-10 text-sm border rounded-lg border-red-500 focus:border-red-600" placeholder="Search Blogs"
+                <input type="search" id="searchBlog" name="searchBlog" class="block md:w-full p-3 ps-10 text-sm border rounded-lg border-red-500 focus:border-red-600 mx-[15%] sm:mx-0" placeholder="Search Blogs"
                 ngModel
                  required />
                  <button class="h-full text-black font-medium text-xl px-4 py-2 absolute top-0 right-[20%]" *ngIf="isSearchTermValid" (click)="cancelSearch(searchTerm)">
                   X
                 </button>
-                <button type="submit" class="h-full text-white absolute right-0 bottom-0 bg-black font-medium rounded-r-lg text-sm px-4 py-2">
+                <button type="submit" class="h-full text-white absolute right-10 md:right-0 bottom-0 bg-black font-medium rounded-r-lg text-sm px-4 py-2">
                   Search
                 </button>
               </div>
             </form>
             <button
               type="button"
-              class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+              class="relative  flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
               [matMenuTriggerFor]="user ? belowMenu : null"
               aria-expanded="false"
               aria-haspopup="true"

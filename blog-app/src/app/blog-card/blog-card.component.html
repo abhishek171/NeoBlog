@@ -8,10 +8,9 @@
   <mat-card-content class="mt-3">
     <div class="flex justify-evenly items-center">
       <div class="mb-2 text-2xl font-bold text-center underline">{{ blogPost?.title }}</div>
-      <button mat-button><i class="fa fa-thumbs-up me-2"></i>LIKE</button>
-      <button mat-button class="me-1"><i class="fa fa-thumbs-down me-2"></i>DISLIKE</button>
+      
     </div>
-    <div class="flex flex-col" [innerHTML] = "blogPost?.body">
+    <div class="flex flex-col items-center " [innerHTML] = "blogPost?.body">
     </div>
     <div class="tags-container">
       <div class="font-medium text-xl">Tags</div>
@@ -26,11 +25,11 @@
     <button  class="bg-red-500 rounded-full px-4 py-2.5 mx-2 text-white text-sm"  *ngIf="user && router.url!=='/blogpost'" (click)="deleteBlog(blogPost?._id)" >Delete</button>
   </mat-card-actions>
 </mat-card>
-<div *ngIf="isModalOpen" class="modal fixed top-0 left-0 h-screen w-[100%] bg-[#38363675] flex justify-center items-center overflow-y-auto z-20">
-  <button class="absolute right-[11%] top-[4%]" (click)="closeModal()">
-    &#x274c;
-  </button>
-  <div class="px-20 pt-10 mt-5 mb-2 text-justify slide-content">
+<div *ngIf="isModalOpen" class="modal fixed top-0 left-0 h-screen w-[100%] bg-[#38363675] flex justify-center items-center overflow-y-auto z-20 pb-5 pt-10">
+  <div class="px-20 pt-10 mt-10 mb-2 text-justify slide-content">
+    <button class="float-end mt-5 me-5" (click)="closeModal()">
+      &#x274c;
+    </button>
     <app-blogform [blogPost] = "blogPost"></app-blogform>
   </div>
 </div>

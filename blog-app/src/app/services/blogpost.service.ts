@@ -12,10 +12,12 @@ export class BlogpostService {
 
   public searchTerm = new BehaviorSubject<string | undefined>(undefined);
   search$ = this.searchTerm.asObservable();
-
+  public searchEmpty: string = "";
+  public searchBarEmpty = false;
   public filteredData: Blog[] = [];
 
   private mongoParentRoute: string = 'http://localhost:8004/blogapp/blogpost';
+  
   constructor(private http: HttpClient) {}
 
   listUserBlogs(skip: number): Observable<{ success: boolean; data: Blog[] }> {
@@ -26,7 +28,7 @@ export class BlogpostService {
   }
 
   blogDetailsById(
-id: string | undefined, skip: number  ): Observable<{ success: boolean; data: Blog[] }> {
+  id: string | undefined, skip: number  ): Observable<{ success: boolean; data: Blog[] }> {
     return this.http.get<{ success: boolean; data: Blog[] }>(
       `${this.mongoParentRoute}/blogDetails/${id}/${skip}`,
       { withCredentials: true }
@@ -56,8 +58,8 @@ id: string | undefined, skip: number  ): Observable<{ success: boolean; data: Bl
     );
   }
 
-  deleteBlog(id: string | undefined) {
-    return this.http.delete<{ success: boolean; data: string }>(
+  deleteBlog(id: string | undefined):Observable<{ success: boolean; message:string}> {
+    return this.http.delete<{ success: boolean; message: string }>(
       `${this.mongoParentRoute}/deleteUserBlog/${id}`,
       { withCredentials: true }
     );
