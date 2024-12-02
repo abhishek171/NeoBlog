@@ -17,7 +17,6 @@ export const addNewUser = async(request: Request, response: Response):Promise<vo
         userData.contentType = file.mimetype;
     }
     try {
-        console.log(userData);
         const user: UserInterface = await addUser(userData);
 
         if(user instanceof Error){
@@ -66,6 +65,7 @@ export const updateUserData = async (request: Request, response: Response):Promi
 
 export const login = async (request: Request, response: Response):Promise<void> => {
     try {
+        console.log(request.headers)
         const userInfo: UserInterface = request.body;
         const user: UserInterface = await userLogin(userInfo.Email, userInfo.Password);
         const token:string = signinToken(user._id);

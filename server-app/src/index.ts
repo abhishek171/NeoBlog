@@ -5,16 +5,18 @@ import dotenv from 'dotenv';
 import { connectToMongoDB } from './dbconnection';
 import userRoutes from './routes/user_routes';
 import blogpostroutes from  './routes/blog_routes';
+import helmet from 'helmet';
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: "http://localhost:4200",
     credentials: true
   };
   
+
   app.use(cookieParser());
   app.use(express.json());
   app.use(cors(corsOptions));

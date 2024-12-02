@@ -14,6 +14,7 @@ export const signinToken:Function = (id:string): string => {
 // JWT Verification Middleware
 export const jwtmiddlwarefunction = (req: Request, res: Response, next: NextFunction):any=> {
     try {
+ 
         const token = req.cookies['jwt-token']; 
         if (!token) {
             throw new Error("Unauthorized Login First");
